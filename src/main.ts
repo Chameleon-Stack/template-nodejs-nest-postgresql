@@ -17,8 +17,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Supplier Portal')
-    .setDescription('Supplier Portal endpoints')
+    .setTitle('CHAMELEON STACK')
+    .setDescription('CHAMELEON STACK ENDPOINTS')
     .setVersion('1.0')
     .addServer(getHost())
     .build();
