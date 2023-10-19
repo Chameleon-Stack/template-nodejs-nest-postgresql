@@ -30,7 +30,7 @@ async function bootstrap() {
     swaggerStats.getMiddleware({
       swaggerSpec: document,
       swaggerOnly: true,
-      name: 'supplier-portal-service',
+      name: 'template-nodejs-nest-postgresql',
       hostname: getHost(),
       uriPath: '/observability',
     }),
