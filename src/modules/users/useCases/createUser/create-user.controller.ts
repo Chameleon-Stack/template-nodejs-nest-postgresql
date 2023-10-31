@@ -7,7 +7,7 @@ import { CreateUserDTO } from './dtos/request/create-user-request.dto';
 import { CreateUserResponseDTO } from './dtos/response/create-user.response.dto';
 
 @ApiTags('User')
-@Controller('users')
+@Controller('user')
 export class CreateUserController implements BaseControllerInterface {
   constructor(private readonly createUserUseCase: CreateUserUseCase) {}
 

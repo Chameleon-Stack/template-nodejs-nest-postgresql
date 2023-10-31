@@ -10,7 +10,7 @@ export const initial = (host: string) => {
      process.env.CURRENT_ENVIRONMENT || 'dev'
    }
    Start developer server at ${host}
-   Start developer docs at ${host}/api 👨‍💻
+   Start developer docs at ${host} 👨‍💻
   `;
 
   console.log(chalk.blue(name));

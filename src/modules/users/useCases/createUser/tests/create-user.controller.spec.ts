@@ -56,7 +56,7 @@ describe('Create user Controller', () => {
       .mockResolvedValueOnce(mockResponse);
 
     const result = await request(app.getHttpServer())
-      .post('/users')
+      .post('/user')
       .send(user)
       .expect(HttpStatus.CREATED);
 
