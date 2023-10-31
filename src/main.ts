@@ -8,9 +8,7 @@ import { initial } from './system/utils/initial';
 dotenv.config();
 
 const getHost = (): string => {
-  const port = process.env.PORT || 3333;
-
-  return process.env.HOST || `http://localhost:${port}`;
+  return `http://localhost:3000`;
 };
 
 async function bootstrap() {
@@ -36,7 +34,7 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(process.env.PORT || 3333);
+  await app.listen(3000);
 
   initial(getHost());
 }

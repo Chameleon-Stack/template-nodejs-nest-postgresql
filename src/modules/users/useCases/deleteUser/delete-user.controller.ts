@@ -3,7 +3,6 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BaseControllerInterface } from '../../../../common/interfaces/base-controller.interface';
 import { CustomApiResponseGetDataWrapper } from '../../../../system/decorators/swagger/api-response-get.decorator';
 import { DeleteUserUseCase } from './delete-user.usecase';
-import { CreateUserResponseDTO } from './dtos/response/create-user.response.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -16,7 +15,7 @@ export class DeleteUserController implements BaseControllerInterface {
   @CustomApiResponseGetDataWrapper({
     status: 204,
     description: 'Delete user',
-    type: CreateUserResponseDTO,
+    type: 'void',
   })
   public async handle(@Query() id: string): Promise<void> {
     return this.deleteUserUseCase.execute(id);
