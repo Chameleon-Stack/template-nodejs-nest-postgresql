@@ -10,6 +10,8 @@ import { GetUserByIdController } from './useCases/getUserById/get-user-by-id.con
 import { GetUserByIdUseCase } from './useCases/getUserById/get-user-by-id.usecase';
 import { SessionController } from './useCases/session/session.controller';
 import { SessionUseCase } from './useCases/session/session.usecase';
+import { UpdateUserController } from './useCases/updateUser/update-user.controller';
+import { UpdateUserUseCase } from './useCases/updateUser/update-user.usecase';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
@@ -19,12 +21,14 @@ import { SessionUseCase } from './useCases/session/session.usecase';
     DeleteUserUseCase,
     GetUserByIdUseCase,
     SessionUseCase,
+    UpdateUserUseCase,
   ],
   controllers: [
     CreateUserController,
     DeleteUserController,
     GetUserByIdController,
     SessionController,
+    UpdateUserController,
   ],
 })
 export class UserModule {}

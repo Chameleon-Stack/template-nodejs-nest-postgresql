@@ -4,7 +4,7 @@ import { UserEntity } from '../../entities/user.entity';
 export interface UserRepositoryInterface {
   createAndSave(new_user: ICreateUserDTO): Promise<UserEntity>;
   updateAndSave(user: UserEntity): Promise<UserEntity>;
-  findById(id: string): Promise<UserEntity | null>;
-  findByEmail(email: string): Promise<UserEntity | null>;
+  findById(id: string): Promise<UserEntity>;
+  findByEmail(email: string): Promise<UserEntity>;
   deleteUser(user: UserEntity): Promise<void>;
 }
