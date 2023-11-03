@@ -2,21 +2,20 @@ import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import request from 'supertest';
-import { ICreateUserDTO } from '../../../dtos/request/create-user-request.dto';
-import { CardEntity } from '../../../entities/card.entity';
 import { UserRepository } from '../../../repositories/user.repository';
-import { CreateUserController } from '../create-user.controller';
-import { CreateUserUseCase } from '../create-user.usecase';
+import { SessionResponseDTO } from '../dtos/response/session-response.dto';
+import { SessionController } from '../session.controller';
+import { SessionUseCase } from '../session.usecase';
 
-describe('Create user Controller', () => {
+describe('Session Controller', () => {
   let app: INestApplication;
-  let createUserUseCase: CreateUserUseCase;
+  let sessionUseCase: SessionUseCase;
 
   beforeAll(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
-      controllers: [CreateUserController],
+      controllers: [SessionController],
       providers: [
-        CreateUserUseCase,
+        SessionUseCase,
         {
           provide: getRepositoryToken(UserRepository),
           useValue: {},
@@ -28,7 +27,7 @@ describe('Create user Controller', () => {
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
 
-    createUserUseCase = moduleRef.get<CreateUserUseCase>(CreateUserUseCase);
+    sessionUseCase = moduleRef.get<SessionUseCase>(SessionUseCase);
   });
 
   afterEach(() => {
@@ -40,27 +39,30 @@ describe('Create user Controller', () => {
   });
 
   it('should be defined', async () => {
-    expect(createUserUseCase).toBeDefined();
+    expect(sessionUseCase).toBeDefined();
   });
 
-  it('Should be able to create user and return status 201', async () => {
+  it('Should be able to log in', async () => {
     const user = {
-      name: 'Test User',
       email: 'test@example.com',
-      password: '******',
-    } as ICreateUserDTO;
-    const mockResponse = new CardEntity();
+      password: '********',
+    };
 
-    const createUserUseCaseSpy = jest
-      .spyOn(createUserUseCase, 'execute')
+    const mockResponse = {
+      user,
+      token: 'testToken',
+    } as SessionResponseDTO;
+
+    const sessionUseCaseSpy = jest
+      .spyOn(sessionUseCase, 'execute')
       .mockResolvedValueOnce(mockResponse);
 
     const result = await request(app.getHttpServer())
-      .post('/users')
+      .post('/user/session')
       .send(user)
-      .expect(HttpStatus.CREATED);
+      .expect(HttpStatus.OK);
 
+    expect(sessionUseCaseSpy).toHaveBeenCalled();
     expect(result.body).toEqual(mockResponse);
-    expect(createUserUseCaseSpy).toHaveBeenCalledWith(user);
   });
 });

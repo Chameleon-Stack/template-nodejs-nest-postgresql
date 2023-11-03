@@ -42,8 +42,14 @@ describe('Delete user Controller', () => {
   });
 
   it('Should be able to delete user and return status 204', async () => {
+    const deleteUserUseCaseSpy = jest
+      .spyOn(deleteUserUseCase, 'execute')
+      .mockResolvedValueOnce();
+
     await request(app.getHttpServer())
-      .delete('/user/uuid')
+      .delete('/user/c36614aa-b41d-4b3a-b454-bed69f431ff5')
       .expect(HttpStatus.NO_CONTENT);
+
+    expect(deleteUserUseCaseSpy).toHaveBeenCalled();
   });
 });

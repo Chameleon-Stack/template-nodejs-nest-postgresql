@@ -54,7 +54,7 @@ describe('Get user  by ID Controller', () => {
       .mockResolvedValueOnce(mockResponse);
 
     const result = await request(app.getHttpServer())
-      .get('/user/uuid')
+      .get('/user/c36614aa-b41d-4b3a-b454-bed69f431ff5')
       .expect(HttpStatus.OK);
 
     expect(result.body).toEqual(mockResponse);

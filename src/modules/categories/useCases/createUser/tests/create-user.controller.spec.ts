@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import request from 'supertest';
 import { ICreateUserDTO } from '../../../dtos/request/create-user-request.dto';
-import { UserEntity } from '../../../entities/category.entity';
+import { CategoryEntity } from '../../../entities/category.entity';
 import { UserRepository } from '../../../repositories/user.repository';
 import { CreateUserController } from '../create-user.controller';
 import { CreateUserUseCase } from '../create-user.usecase';
@@ -49,7 +49,7 @@ describe('Create user Controller', () => {
       email: 'test@example.com',
       password: '******',
     } as ICreateUserDTO;
-    const mockResponse = new UserEntity();
+    const mockResponse = new CategoryEntity();
 
     const createUserUseCaseSpy = jest
       .spyOn(createUserUseCase, 'execute')

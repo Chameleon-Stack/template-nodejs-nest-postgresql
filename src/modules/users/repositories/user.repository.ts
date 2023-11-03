@@ -23,12 +23,14 @@ export class UserRepository
   public async findById(id: string): Promise<UserEntity> {
     return this.dataSource
       .createQueryBuilder(UserEntity, 'user')
+      .select('*')
       .where(`"user"."id" = '${id}'`)
       .getRawOne();
   }
   public async findByEmail(email: string): Promise<UserEntity> {
     return this.dataSource
       .createQueryBuilder(UserEntity, 'user')
+      .select('*')
       .where(`"user"."email" = '${email}'`)
       .getRawOne();
   }

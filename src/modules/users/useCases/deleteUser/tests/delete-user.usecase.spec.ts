@@ -15,7 +15,7 @@ describe('Delete user UseCase', () => {
           provide: getRepositoryToken(UserRepository),
           useValue: {
             findById: jest.fn(),
-            createAndSave: jest.fn(),
+            deleteUser: jest.fn(),
           },
         },
       ],
@@ -49,8 +49,11 @@ describe('Delete user UseCase', () => {
       .spyOn(repository, 'findById')
       .mockResolvedValueOnce(user);
 
+    const deleteUserSpy = jest.spyOn(repository, 'deleteUser');
+
     await deleteUserUseCase.execute('1');
 
     expect(createAndSaveUserSpy).toHaveBeenCalled();
+    expect(deleteUserSpy).toHaveBeenCalledWith(user);
   });
 });

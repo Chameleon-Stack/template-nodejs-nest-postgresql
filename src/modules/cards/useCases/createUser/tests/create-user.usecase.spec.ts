@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ICreateUserDTO } from '../../../dtos/request/create-user-request.dto';
-import { UserEntity } from '../../../entities/card.entity';
 import { UserRepository } from '../../../repositories/user.repository';
 import { CreateUserUseCase } from '../create-user.usecase';
 
@@ -45,7 +44,7 @@ describe('Create user UseCase', () => {
       password: '******',
     } as ICreateUserDTO;
 
-    const userCreated = Object.assign(user, { id: '1' }) as UserEntity;
+    const userCreated = Object.assign(user, { id: '1' }) as any;
 
     const findByEmailUserSpy = jest
       .spyOn(repository, 'findByEmail')
