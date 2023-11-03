@@ -2,9 +2,9 @@ import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BaseControllerInterface } from '../../../../common/interfaces/base-controller.interface';
 import { CustomApiResponseGetDataWrapper } from '../../../../system/decorators/swagger/api-response-get.decorator';
+import { UserEntityDTO } from '../../dtos/response/user.entity.dto';
 import { CreateUserUseCase } from './create-user.usecase';
 import { CreateUserDTO } from './dtos/request/create-user-request.dto';
-import { CreateUserResponseDTO } from './dtos/response/create-user.response.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -17,11 +17,9 @@ export class CreateUserController implements BaseControllerInterface {
   @CustomApiResponseGetDataWrapper({
     status: 201,
     description: 'Create user',
-    type: CreateUserResponseDTO,
+    type: UserEntityDTO,
   })
-  public async handle(
-    @Body() user: CreateUserDTO,
-  ): Promise<CreateUserResponseDTO> {
+  public async handle(@Body() user: CreateUserDTO): Promise<UserEntityDTO> {
     return this.createUserUseCase.execute(user);
   }
 }

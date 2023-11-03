@@ -2,15 +2,15 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserEntity } from '../../../entities/user.entity';
 import { UserRepository } from '../../../repositories/user.repository';
-import { DeleteUserUseCase } from '../delete-user.usecase';
+import { GetUserByIdUseCase } from '../get-user-by-id.usecase';
 
 describe('Delete user UseCase', () => {
-  let deleteUserUseCase: DeleteUserUseCase, repository: UserRepository;
+  let getUserByIdUseCase: GetUserByIdUseCase, repository: UserRepository;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        DeleteUserUseCase,
+        GetUserByIdUseCase,
         {
           provide: getRepositoryToken(UserRepository),
           useValue: {
@@ -21,7 +21,7 @@ describe('Delete user UseCase', () => {
       ],
     }).compile();
 
-    deleteUserUseCase = module.get<DeleteUserUseCase>(DeleteUserUseCase);
+    getUserByIdUseCase = module.get<GetUserByIdUseCase>(GetUserByIdUseCase);
 
     repository = await module.resolve<UserRepository>(
       getRepositoryToken(UserRepository),
@@ -33,11 +33,11 @@ describe('Delete user UseCase', () => {
   });
 
   it('should be defined', async () => {
-    expect(deleteUserUseCase).toBeDefined();
+    expect(getUserByIdUseCase).toBeDefined();
     expect(repository).toBeDefined();
   });
 
-  it('Should be able to delete user', async () => {
+  it('Should be able to get user', async () => {
     const user = {
       id: '1',
       name: 'Test User',
@@ -49,7 +49,7 @@ describe('Delete user UseCase', () => {
       .spyOn(repository, 'findById')
       .mockResolvedValueOnce(user);
 
-    await deleteUserUseCase.execute('1');
+    await getUserByIdUseCase.execute('1');
 
     expect(createAndSaveUserSpy).toHaveBeenCalled();
   });

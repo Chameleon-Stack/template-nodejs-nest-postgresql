@@ -9,7 +9,7 @@ import { DeleteUserUseCase } from './delete-user.usecase';
 export class DeleteUserController implements BaseControllerInterface {
   constructor(private readonly deleteUserUseCase: DeleteUserUseCase) {}
 
-  @Delete('/')
+  @Delete('/:uuid')
   @HttpCode(204)
   @ApiOperation({ summary: 'Delete user' })
   @CustomApiResponseGetDataWrapper({
