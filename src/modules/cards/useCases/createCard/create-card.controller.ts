@@ -3,12 +3,12 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BaseControllerInterface } from '../../../../common/interfaces/base-controller.interface';
 import { CustomApiResponseGetDataWrapper } from '../../../../system/decorators/swagger/api-response-get.decorator';
 import { CardEntity } from '../../entities/card.entity';
-import { CreateUserUseCase } from './create-user.usecase';
+import { CreateUserUseCase } from './create-card.usecase';
 import { CreateUserDTO } from './dtos/request/create-user-request.dto';
 import { CreateUserResponseDTO } from './dtos/response/create-user.response.dto';
 
-@ApiTags('User')
-@Controller('users')
+@ApiTags('Card')
+@Controller('card')
 export class CreateUserController implements BaseControllerInterface {
   constructor(private readonly createUserUseCase: CreateUserUseCase) {}
 

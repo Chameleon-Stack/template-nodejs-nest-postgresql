@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserRepository } from '../users/repositories/user.repository';
 import { CategoryEntity } from './entities/category.entity';
-import { UserRepository } from './repositories/user.repository';
-import { CreateUserController } from './useCases/createUser/create-user.controller';
-import { CreateUserUseCase } from './useCases/createUser/create-user.usecase';
+import { CategoryRepository } from './repositories/category.repository';
+import { CreateCategoryController } from './useCases/createCategory/create-category.controller';
+import { CreateCategoryUseCase } from './useCases/createCategory/create-category.usecase';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CategoryEntity])],
-  providers: [CreateUserUseCase, UserRepository],
-  controllers: [CreateUserController],
+  providers: [CreateCategoryUseCase, CategoryRepository, UserRepository],
+  controllers: [CreateCategoryController],
 })
 export class CategoryModule {}

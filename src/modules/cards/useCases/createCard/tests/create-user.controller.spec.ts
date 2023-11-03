@@ -5,8 +5,8 @@ import request from 'supertest';
 import { ICreateUserDTO } from '../../../dtos/request/create-user-request.dto';
 import { CardEntity } from '../../../entities/card.entity';
 import { UserRepository } from '../../../repositories/user.repository';
-import { CreateUserController } from '../create-user.controller';
-import { CreateUserUseCase } from '../create-user.usecase';
+import { CreateUserController } from '../create-card.controller';
+import { CreateUserUseCase } from '../create-card.usecase';
 
 describe('Create user Controller', () => {
   let app: INestApplication;
@@ -56,7 +56,7 @@ describe('Create user Controller', () => {
       .mockResolvedValueOnce(mockResponse);
 
     const result = await request(app.getHttpServer())
-      .post('/users')
+      .post('/card')
       .send(user)
       .expect(HttpStatus.CREATED);
 

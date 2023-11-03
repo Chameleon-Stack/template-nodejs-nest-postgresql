@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ICreateUserDTO } from '../../../dtos/request/create-user-request.dto';
 import { UserRepository } from '../../../repositories/user.repository';
-import { CreateUserUseCase } from '../create-user.usecase';
+import { CreateUserUseCase } from '../create-card.usecase';
 
 describe('Create user UseCase', () => {
   let createUserUseCase: CreateUserUseCase, repository: UserRepository;
