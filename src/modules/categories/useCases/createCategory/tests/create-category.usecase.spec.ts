@@ -6,7 +6,7 @@ import { CategoryEntity } from '../../../entities/category.entity';
 import { CategoryRepository } from '../../../repositories/category.repository';
 import { CreateCategoryUseCase } from '../create-category.usecase';
 
-describe('Create user UseCase', () => {
+describe('Create category UseCase', () => {
   let createCategoryUseCase: CreateCategoryUseCase,
     repositoryCategory: CategoryRepository,
     repositoryUser: UserRepository;
@@ -53,7 +53,7 @@ describe('Create user UseCase', () => {
     expect(repositoryUser).toBeDefined();
   });
 
-  it('Should be able to create user', async () => {
+  it('Should be able to create category', async () => {
     const user = {
       id: '1',
       name: 'Test User',

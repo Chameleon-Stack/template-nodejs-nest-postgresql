@@ -27,9 +27,9 @@ export class CreateCategoryController implements BaseControllerInterface {
     type: CategoryEntityDTO,
   })
   public async handle(
-    @Body() name: string,
+    @Body() data: { name: string },
     @Param('user_id', new ParseUUIDPipe()) user_id: string,
   ): Promise<CategoryEntity> {
-    return this.createCategoryUseCase.execute(name, user_id);
+    return this.createCategoryUseCase.execute(data.name, user_id);
   }
 }

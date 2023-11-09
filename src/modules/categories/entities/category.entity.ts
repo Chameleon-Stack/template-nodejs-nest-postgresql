@@ -29,10 +29,12 @@ export class CategoryEntity {
   @Column('uuid')
   user_id: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.cards)
+  @ManyToOne(() => UserEntity, (user) => user.cards, { onDelete: 'SET NULL' })
   @JoinColumn({ name: 'user_id' })
   user: Relation<UserEntity>;
 
-  @ManyToMany(() => CardEntity, (card) => card.categories)
+  @ManyToMany(() => CardEntity, (card) => card.categories, {
+    onDelete: 'SET NULL',
+  })
   cards: Relation<CardEntity[]>;
 }

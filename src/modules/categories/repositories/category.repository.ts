@@ -23,8 +23,9 @@ export class CategoryRepository
 
   public async findById(id: string): Promise<CategoryEntity> {
     return this.dataSource
-      .createQueryBuilder(CategoryEntity, 'user')
-      .where(`"user"."id" = '${id}'`)
+      .createQueryBuilder(CategoryEntity, 'category')
+      .select('*')
+      .where(`"category"."id" = '${id}'`)
       .getRawOne();
   }
 
@@ -34,8 +35,8 @@ export class CategoryRepository
   ): Promise<CategoryEntity[]> {
     const query = this.dataSource
       .createQueryBuilder(CategoryEntity, 'category')
-      .innerJoin('category.user', 'user', 'user.id = category.user_id')
-      .where(`user.id = '${user_id}'`);
+      .select('*')
+      .where(`category.user_id = '${user_id}'`);
 
     if (name) {
       query.andWhere(`lower(category.name) ilike '%${name}%'`);
