@@ -4,7 +4,7 @@ import { CategoryEntity } from '../../../entities/category.entity';
 import { CategoryRepository } from '../../../repositories/category.repository';
 import { GetCategoriesUseCase } from '../get-categories.usecase';
 
-describe('Create user UseCase', () => {
+describe('Get categories UseCase', () => {
   let getCategoriesUseCase: GetCategoriesUseCase,
     repositoryCategory: CategoryRepository;
 

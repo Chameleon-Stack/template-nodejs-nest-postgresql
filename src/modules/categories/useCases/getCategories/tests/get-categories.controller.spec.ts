@@ -8,7 +8,7 @@ import { CategoryRepository } from '../../../repositories/category.repository';
 import { GetCategoriesController } from '../get-categories.controller';
 import { GetCategoriesUseCase } from '../get-categories.usecase';
 
-describe('Create category Controller', () => {
+describe('Get categories Controller', () => {
   let app: INestApplication;
   let getCategoriesUseCase: GetCategoriesUseCase;
 
