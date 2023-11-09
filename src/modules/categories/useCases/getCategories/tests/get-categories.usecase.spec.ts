@@ -51,7 +51,7 @@ describe('Create user UseCase', () => {
       .spyOn(repositoryCategory, 'findAll')
       .mockResolvedValueOnce(category);
 
-    const result = await getCategoriesUseCase.execute('Test category', 'uuid');
+    const result = await getCategoriesUseCase.execute('uuid', 'Test category');
 
     expect(result).toEqual(category);
     expect(findByIdUserSpy).toHaveBeenCalledWith('uuid', 'Test category');
