@@ -4,6 +4,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { FindAllCardsDTO } from '../../../cards/dtos/request/find-all-cards-request.dto';
+import { CardRepository } from '../../../cards/repositories/card.repository';
+import { CardRepositoryInterface } from '../../../cards/repositories/interfaces/card-repository.interface';
 import { CategoryRepository } from '../../../categories/repositories/category.repository';
 import { CategoryRepositoryInterface } from '../../../categories/repositories/interfaces/category-repository.interface';
 import { UserRepositoryInterface } from '../../repositories/interfaces/user-repository.interface';
@@ -17,6 +20,9 @@ export class DeleteUserUseCase {
 
     @InjectRepository(CategoryRepository)
     private readonly categoryRepository: CategoryRepositoryInterface,
+
+    @InjectRepository(CardRepository)
+    private readonly cardRepository: CardRepositoryInterface,
   ) {}
 
   public async execute(id: string): Promise<void> {
@@ -28,13 +34,25 @@ export class DeleteUserUseCase {
 
     const categories = await this.categoryRepository.findAll(id);
 
-    categories.forEach(async (category) => {
+    for await (const category of categories) {
       try {
         await this.categoryRepository.deleteCategory(category);
       } catch (err) {
         throw new BadRequestException(`Error deleting category ${err}`);
       }
-    });
+    }
+
+    const cards = await this.cardRepository.findAll({
+      user_id: id,
+    } as FindAllCardsDTO);
+
+    for await (const card of cards) {
+      try {
+        await this.cardRepository.deleteCard(card);
+      } catch (err) {
+        throw new BadRequestException(`Error deleting card ${err}`);
+      }
+    }
 
     await this.userRepository.deleteUser(user);
   }

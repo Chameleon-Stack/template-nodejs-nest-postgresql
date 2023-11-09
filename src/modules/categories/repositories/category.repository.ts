@@ -42,7 +42,7 @@ export class CategoryRepository
       query.andWhere(`lower(category.name) ilike '%${name}%'`);
     }
 
-    return query.getMany();
+    return query.getRawMany();
   }
 
   public async deleteCategory(category: CategoryEntity): Promise<void> {

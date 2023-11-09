@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CardRepository } from '../cards/repositories/card.repository';
 import { CategoryRepository } from '../categories/repositories/category.repository';
 import { UserEntity } from './entities/user.entity';
 import { UserRepository } from './repositories/user.repository';
@@ -17,9 +18,10 @@ import { UpdateUserUseCase } from './useCases/updateUser/update-user.usecase';
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
   providers: [
-    CreateUserUseCase,
     UserRepository,
     CategoryRepository,
+    CardRepository,
+    CreateUserUseCase,
     DeleteUserUseCase,
     GetUserByIdUseCase,
     SessionUseCase,
