@@ -3,7 +3,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserRepository } from '../../../repositories/user.repository';
 import { UpdateUserUseCase } from '../update-user.usecase';
 
-describe('Create user UseCase', () => {
+describe('Update user UseCase', () => {
   let updateUserUseCase: UpdateUserUseCase, repository: UserRepository;
 
   beforeAll(async () => {
