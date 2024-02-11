@@ -26,6 +26,9 @@ export class CategoryEntity {
   @Column()
   name: string;
 
+  @Column()
+  color: string;
+
   @Column('uuid')
   user_id: string;
 
