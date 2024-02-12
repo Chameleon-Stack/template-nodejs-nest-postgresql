@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateCategoryResponseDTO {
+export class CreateUserResponseDTO {
   @ApiProperty({
     type: 'string',
     description: 'id',
@@ -24,15 +24,29 @@ export class CreateCategoryResponseDTO {
 
   @ApiProperty({
     type: 'string',
-    description: 'Category name',
+    description: 'User name',
     example: 'Test',
   })
   readonly name: string;
 
   @ApiProperty({
     type: 'string',
-    description: 'color',
-    example: 'black',
+    description: 'User email',
+    example: 'test@example.com',
   })
-  readonly color: string;
+  readonly email: string;
+
+  @ApiProperty({
+    type: 'string',
+    description: 'User password',
+    example: '********',
+  })
+  readonly password: string;
+
+  @ApiProperty({
+    type: 'string',
+    description: 'Photo profile',
+    example: 'photo.png',
+  })
+  readonly photo?: string;
 }

@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserEntity } from '../../../../users/entities/user.entity';
 import { UserRepository } from '../../../../users/repositories/user.repository';
 import { CategoryEntity } from '../../../entities/category.entity';
@@ -16,13 +15,13 @@ describe('Create category UseCase', () => {
       providers: [
         CreateCategoryUseCase,
         {
-          provide: getRepositoryToken(CategoryRepository),
+          provide: CategoryRepository,
           useValue: {
             createAndSave: jest.fn(),
           },
         },
         {
-          provide: getRepositoryToken(UserRepository),
+          provide: UserRepository,
           useValue: {
             findById: jest.fn(),
           },
@@ -34,13 +33,10 @@ describe('Create category UseCase', () => {
       CreateCategoryUseCase,
     );
 
-    repositoryCategory = await module.resolve<CategoryRepository>(
-      getRepositoryToken(CategoryRepository),
-    );
+    repositoryCategory =
+      await module.resolve<CategoryRepository>(CategoryRepository);
 
-    repositoryUser = await module.resolve<UserRepository>(
-      getRepositoryToken(UserRepository),
-    );
+    repositoryUser = await module.resolve<UserRepository>(UserRepository);
   });
 
   afterEach(() => {
@@ -76,7 +72,7 @@ describe('Create category UseCase', () => {
       .mockResolvedValueOnce(category);
 
     const result = await createCategoryUseCase.execute(
-      'Test category',
+      { name: 'Test category', color: 'red' },
       user.id,
     );
 
